@@ -1,0 +1,11 @@
+/.idea/*
+.gitosc
+/storage/
+*log
+test.go
+/log/
+go.sum
+config.yaml
+/conf/app_local.ini
+tmp
+.DS_Store
