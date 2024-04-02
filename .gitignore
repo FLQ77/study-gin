@@ -5,7 +5,7 @@
 test.go
 /log/
 go.sum
-config.yaml
+config.pro.yaml
 /conf/app_local.ini
 tmp
 .DS_Store
