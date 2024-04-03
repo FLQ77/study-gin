@@ -10,6 +10,7 @@ gorm
 jwt token认证go-jwt  
 zap 日志  
 Redis
+gin-swagger
 
 #### 项目目录
 
@@ -23,6 +24,7 @@ Redis
 |bootstrap| 项目启动初始化 |
 |config| 配置文件 |
 |config| 配置结构体 |
+|docs| swagger文档 |
 |global| 全局变量 |
 |routes| 路由定义 |
 |static| 静态资源（允许外部访问） |
