@@ -1,0 +1,142 @@
+definitions:
+  request.ImageUpload:
+    type: object
+  request.Login:
+    properties:
+      mobile:
+        type: string
+      password:
+        type: string
+    required:
+    - mobile
+    - password
+    type: object
+  request.Register:
+    properties:
+      mobile:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+    required:
+    - mobile
+    - name
+    - password
+    type: object
+  response.Response:
+    properties:
+      data:
+        description: 数据
+      error_code:
+        description: 自定义错误码
+        type: integer
+      message:
+        description: 信息
+        type: string
+    type: object
+info:
+  contact: {}
+  description: 本文档主要是提供app使用的接口, 接口域名：https://localhost:8888/
+  title: api接口文档
+  version: 0.0.1
+paths:
+  /api/image_upload:
+    post:
+      parameters:
+      - description: params
+        in: body
+        name: params
+        required: true
+        schema:
+          $ref: '#/definitions/request.ImageUpload'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+      summary: 图片上传
+      tags:
+      - 公共
+  /auth/info:
+    get:
+      consumes:
+      - application/json
+      description: 获取用户信息
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"error_code": 0, "message": "OK", "data": {}}'
+          schema:
+            $ref: '#/definitions/response.Response'
+      summary: Info
+      tags:
+      - example
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: 用户登录
+      parameters:
+      - description: params
+        in: body
+        name: params
+        required: true
+        schema:
+          $ref: '#/definitions/request.Login'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"error_code": 0, "message": "OK", "data": {}}'
+          schema:
+            $ref: '#/definitions/response.Response'
+      summary: Login
+      tags:
+      - example
+  /auth/logout:
+    post:
+      consumes:
+      - application/json
+      description: 用户登出
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"error_code": 0, "message": "OK", "data": {}}'
+          schema:
+            $ref: '#/definitions/response.Response'
+      summary: Logout
+      tags:
+      - example
+  /auth/register:
+    post:
+      consumes:
+      - application/json
+      description: 用户注册
+      parameters:
+      - description: params
+        in: body
+        name: params
+        required: true
+        schema:
+          $ref: '#/definitions/request.Register'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+      summary: Register
+      tags:
+      - example
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

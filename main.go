@@ -5,6 +5,13 @@ import (
 	"study-gin/global"
 )
 
+// @title api接口文档
+// @version 0.0.1
+// @description 本文档主要是提供app使用的接口, 接口域名：https://localhost:8888/
+// @securityDefinitions.apikey ApiKeyAuth
+// @in header
+// @name Authorization
+// @BasePath /api
 func main() {
 	// 初始化配置
 	bootstrap.InitializeConfig()

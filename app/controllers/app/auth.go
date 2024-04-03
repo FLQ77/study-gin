@@ -8,6 +8,14 @@ import (
 	"study-gin/app/services"
 )
 
+// @Summary Login
+// @Description 用户登录
+// @Tags example
+// @Accept json
+// @Produce json
+// @Param params body request.Login true "params"
+// @Success 200 {object} response.Response "{"error_code": 0, "message": "OK", "data": {}}"
+// @Router /auth/login [post]
 func Login(c *gin.Context) {
 	var form request.Login
 	if err := c.ShouldBindJSON(&form); err != nil {
@@ -27,6 +35,13 @@ func Login(c *gin.Context) {
 	}
 }
 
+// @Summary Info
+// @Description 获取用户信息
+// @Tags example
+// @Accept json
+// @Produce json
+// @Success 200 {object} response.Response "{"error_code": 0, "message": "OK", "data": {}}"
+// @Router /auth/info [get]
 func Info(c *gin.Context) {
 	err, user := services.UserService.GetUserInfo(c.Keys["id"].(string))
 	if err != nil {
@@ -36,6 +51,13 @@ func Info(c *gin.Context) {
 	response.Success(c, user)
 }
 
+// @Summary Logout
+// @Description 用户登出
+// @Tags example
+// @Accept json
+// @Produce json
+// @Success 200 {object} response.Response "{"error_code": 0, "message": "OK", "data": {}}"
+// @Router /auth/logout [post]
 func Logout(c *gin.Context) {
 	err := services.JwtService.JoinBlackList(c.Keys["token"].(*jwt.Token))
 	if err != nil {

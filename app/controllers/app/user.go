@@ -7,7 +7,16 @@ import (
 	"study-gin/app/services"
 )
 
-// Register 用户注册
+// Register
+// @Summary Register
+// @Schemes
+// @Description 用户注册
+// @Tags example
+// @Accept json
+// @Produce json
+// @param params body request.Register true "params"
+// @Success 200 {object} response.Response
+// @Router /auth/register [post]
 func Register(c *gin.Context) {
 	var form request.Register
 	if err := c.ShouldBindJSON(&form); err != nil {

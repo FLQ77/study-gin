@@ -2,12 +2,16 @@ package bootstrap
 
 import (
 	"context"
+	"fmt"
 	"github.com/gin-gonic/gin"
+	swaggerfiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 	"log"
 	"net/http"
 	"os"
 	"os/signal"
 	"study-gin/app/middleware"
+	"study-gin/docs"
 	"study-gin/global"
 	"study-gin/routes"
 	"syscall"
@@ -34,6 +38,10 @@ func setupRouter() *gin.Engine {
 	apiGroup := router.Group("/api")
 	routes.SetApiGroupRoutes(apiGroup)
 
+	// 注册swagger路由
+	docs.SwaggerInfo.BasePath = "/"
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
+
 	return router
 }
 
@@ -45,6 +53,9 @@ func RunServer() {
 		Addr:    ":" + global.App.Config.App.Port,
 		Handler: r,
 	}
+
+	fmt.Printf(`APP 默认自动化文档地址:http://localhost%s/swagger/index.html
+`, srv.Addr)
 
 	go func() {
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
